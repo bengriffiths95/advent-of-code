@@ -12,7 +12,11 @@ class TestHorizontalMatching:
         assert output == 1
 
     def test_function_correctly_counts_backward_horizontal_matches(self):
-        list = [['.','.','X','.','.','.'],['.','S','A','M','X','.'],['.','A','.','.','A','.'],['X','A','A','S','.','S'],['.','X','.','.','.','.']]
+        list = [['.','.','X','.','.','.'],
+                ['.','S','A','M','X','.'],
+                ['.','A','.','.','.','.'],
+                ['X','A','A','S','.','S'],
+                ['.','X','.','.','.','.']]
         output = word_count(list)
         assert output == 1
 
@@ -56,3 +60,22 @@ class TestVerticalMatching:
                 ['.','X','.','.','.','.']]
         output = word_count(list)
         assert output == 3
+
+class TestDiagonalMatching:
+    def test_function_correctly_counts_diagonal_first_direction(self):
+        list = [['.','.','.','.','X','.'],
+                ['.','.','.','M','.','.'],
+                ['.','.','A','.','.','.'],
+                ['.','S','.','.','.','.'],
+                ['.','.','.','.','.','.']]
+        output = word_count(list)
+        assert output == 1
+
+    def test_function_correctly_counts_diagonal_second_direction(self):
+        list = [['.','.','X','.','.','.'],
+                ['.','.','.','M','.','.'],
+                ['.','.','.','.','A','.'],
+                ['.','.','.','.','.','S'],
+                ['.','.','.','.','.','.']]
+        output = word_count(list)
+        assert output == 1

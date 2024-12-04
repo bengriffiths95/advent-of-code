@@ -1,5 +1,6 @@
 import re
-from pprint import pprint
+import numpy as np
+
 
 def word_count(matrix):
     matches_count = 0
@@ -28,11 +29,22 @@ def word_count(matrix):
         if matches:
             matches_count += len(matches)
 
-
     # checking diagonal matches
-    
-        # row_values = list(zip(*row))[1]
-        # row_joined = ''.join(row_values)
+    matrix_np = np.array(matrix)
+    matrix_diag = [np.diag(matrix_np[-1:-matrix_np.shape[0]-1:-1,:], i).tolist() for i in range(-matrix_np.shape[0]+1,matrix_np.shape[0])]
+    for row in matrix_diag:
+        row_joined = ''.join(row)
+        matches = re.findall(r'SAMX|XMAS', row_joined)
+        if matches:
+            matches_count += len(matches)
+
+    flipped_matrix_np = matrix_np[:, ::-1]
+    flipped_matrix_diag = [np.diag(flipped_matrix_np[-1:-flipped_matrix_np.shape[0]-1:-1,:], i).tolist() for i in range(-flipped_matrix_np.shape[0]+1,flipped_matrix_np.shape[0])]
+    for row in flipped_matrix_diag:
+        row_joined = ''.join(row)
+        matches = re.findall(r'SAMX|XMAS', row_joined)
+        if matches:
+            matches_count += len(matches)
 
     return matches_count
 
